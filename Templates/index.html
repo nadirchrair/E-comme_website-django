@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block content %}
+{% if   user.is_authenticated %}
+
+<h1>{{user.username}}</h1>
+
+<h4><a href="{% url 'logout' %}">logout</a></h4>
+{% if user.cart %}
+<h4><a href="{% url 'cart' %}"> voir panier {{user.cart.order.count}}</a></h4>
+
+  
+{% endif %}
+
+{% for pro in product  %}
+    <a href="{% url 'product_detial' pro.slug %}"><h2>{{pro.name}}</h2></a>
+    <img src="{{pro.image.url}}" width="250px"/>
+{% endfor %}
+    
+{% else %}
+<a href="{% url 'signup' %}">sign up</a>
+<a href="{% url 'login' %}">login</a>
+
+{% endif %}
+
+{% endblock content %}
+    
